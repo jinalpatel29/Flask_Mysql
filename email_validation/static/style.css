@@ -1,0 +1,25 @@
+body{
+    margin-left: 50px;
+}
+#error{
+    background-color: red;
+    width: 450px;
+    padding: 5px;
+}
+#success{
+    background-color: green;
+    width: 450px;
+    padding: 5px;
+    border: 2px solid black;
+}
+
+table{
+    border: 1px solid gray;
+    background-color: rosybrown;
+    padding: 20px;
+}
+
+th, td{
+    padding: 5px;
+    border: 1px solid rgb(41, 40, 37);
+}

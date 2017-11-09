@@ -1,0 +1,33 @@
+.login{
+    width: 800px;
+    height: 300px;
+    border: 2px solid blue;
+    padding: 20px;
+    text-align: center;
+    background-color: rgb(216, 224, 231);
+}
+
+label{
+    padding: 2px; 
+    border: 2px rebeccapurple solid;
+    background-color: rgb(130, 130, 219);
+    color: white;
+}
+input{
+    margin-bottom: 5px;
+    margin-left: -2px;
+    padding: 5px;
+}
+
+button{
+    width: 250px;
+    padding: 5px;
+    margin: 5px;
+    background-color: #D8CDCA;
+
+    /* #4999E8; */
+}
+
+a{
+    font-weight: bold;   
+}

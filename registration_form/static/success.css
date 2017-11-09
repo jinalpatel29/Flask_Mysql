@@ -1,0 +1,27 @@
+.result{
+    text-align: center;
+    border: blue solid 2px;
+    margin: 20px;
+    padding: 20px;
+    background-color: rgb(216, 224, 231);
+}
+h2{
+    text-align: center;
+    color: rgb(30, 131, 52);
+}
+h4{
+    margin: 0 auto;
+    display: inline-block;
+}
+p{
+    display: inline-block;
+    margin: 0 auto;
+}
+
+button{
+    margin-top: 10px;
+    width: 150px;
+    background-color: rgb(43, 43, 145);
+    color: wheat;
+    font-size: 18px;
+}
