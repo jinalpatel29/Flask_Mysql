@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Confirmation</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='success.css')}}">
+</head>
+<body>
+   
+    <div class="result">
+        {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+                {% for message in messages %}
+        <h2>{{message}}</h2>
+                <br> {% endfor %} 
+            {% endif %} 
+        {% endwith %}     
+        <!-- <h2> Submitted Info</h2>
+        <h3>.......Thanks for registering , you have successfully logged in to the system .......</h3> -->
+        <h4> First Name: </h4>
+        <p> {{fname}}</p><br>
+        <h4> Last Name: </h4>
+        <p> {{lname}}</p><br>
+        <h4> Email: </h4>
+        <p> {{email}}</p>        
+        <form action="reset">
+            <button type="submit">logout</button>   
+        </form>       
+    </div>
+</body>
+</html>

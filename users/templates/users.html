@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Users</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <p>{{message}}</p>
+        <br> {% endfor %} {% endif %} {% endwith %}
+        <h1>Users </h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+            {%if users%}
+                {% for user in users %}
+            <tr>
+                <td>{{ user['id'] }}</td>
+                <td>{{user['firstname']}} {{user['lastname']}}</td>
+                <td>{{user['email']}}</td>
+                <td>{{user['created_at']}}</td>
+                <td><a href="/users/{{user['id']}}">Show  </a>| 
+                    <a href="/users/{{user['id']}}/edit">  Edit</a>|
+                    <form action="/{{user['id']}}/delete" method="post">
+                        <button type="submit" id="delete">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {%endfor%}
+            {%endif%}
+        </table>
+        <p><a href="/users/new">Add a new user</a></p>
+    </div>
+</body>
+</html>

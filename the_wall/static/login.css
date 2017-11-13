@@ -1,0 +1,44 @@
+body{
+    background-image: url('login2.jpg');
+}
+.login{
+    /* width: 800px;
+    height: 300px; */
+    /* border: 2px solid blue; */
+    padding: 20px;
+    text-align: center;
+    margin-left: 35%;
+    width: 30%;
+    background-color: rgba(238, 240, 241, 0.253);
+    /* background-image: url('login2.jpg'); */
+}
+
+/* label{
+    padding: 2px; 
+    border: 2px rebeccapurple solid;
+    background-color: rgb(130, 130, 219);
+    color: white;
+} */
+input{
+    width: 235px;
+    margin-bottom: 5px;
+    margin-left: -2px;
+    padding: 5px;
+}
+
+button{
+    width: 250px;
+    padding: 5px;
+    margin: 5px;
+    background-color: #D8CDCA;
+
+    /* #4999E8; */
+}
+
+a{
+    font-weight: bold;   
+}
+#error{
+    color: red;
+
+}

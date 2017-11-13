@@ -1,0 +1,127 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url('wall.jpg');
+}
+.container{
+    /* width: 970px;   */
+    border: 2px rebeccapurple solid;
+    /* background-color: rgb(210, 197, 197); */
+    /* background-color: rgb(95, 185, 185);
+    border: 2px solid rgb(64, 80, 153); */
+    margin: 0 auto;
+}
+header{
+    border-bottom: 2px solid rgb(35, 41, 88);
+    color: rgb(211, 211, 228);
+    display: inline-block;
+    width: 100%;
+}
+h1{
+    display: inline-block;
+    width: 30%;
+    margin: 20px 5px;
+}
+#head{
+    display: inline-block;
+    width: 45%;
+    text-align: right;
+    font-weight: bold;
+    color: rgb(240, 215, 219);
+    margin: 2% auto;
+}
+a{
+    display: inline-block;
+    margin-left: 55px;
+    width: 10%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    color: rgb(6, 4, 24);
+    background-color: rgb(168, 134, 204);
+}
+form{
+    text-align: center;
+}
+input{
+    width:90%;
+    height: 60px;
+    background-color: rgba(236, 232, 240, 0.795);
+    
+}
+.posts{
+    margin-left: 20px;
+}
+#post{
+    padding: 5px;
+    margin: 0 5%;
+    color:  rgb(212, 203, 203);
+    font-family:'Times New Roman', Times, serif;
+    text-align: left;
+}
+p{
+    vertical-align: bottom;
+}
+button{
+    margin-top: 10px;
+    margin-left: 80%;
+    background-color: rgba(187, 204, 214, 0.801);
+    color: #291e1e;
+    font-weight: bold;
+    padding: 5px;
+    border: 1px black solid;
+
+}
+.messages{
+    text-align: justify;
+}
+#comment{
+    margin-top: 10px;
+    width: 92%;
+    height: 30px;
+    margin: 5px 45px;
+}
+.box{    
+    background-color: rgba(213, 238, 220, 0.637);    
+    border: 1px solid rgb(235, 235, 247);
+    margin: 2% 10%;
+    width: 80%;
+    
+}
+#green{
+    background-color: rgb(12, 136, 84);
+    margin-bottom: 10px;
+    margin-left: 90%;
+    width:  80px;
+}
+
+h3{
+    margin: 5px;
+    margin-left: 10px;
+    color: rgb(81, 38, 121);
+}
+#msg{
+    margin: 5px;
+    margin-left: 15px;
+}
+.content{
+    margin:0 40px;
+}
+#cmt{
+    padding-bottom: 10px;
+    margin: 0 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+h5{
+    padding: 2px;
+    margin-left: 20px;
+    margin: 0;
+    color: rgba(173, 4, 41, 0.91);
+}

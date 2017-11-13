@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url('register.jpg');
+}
+/* .register{
+  background-color: rgb(216, 205, 202);
+  padding: 20px;
+  border: 2px solid gray;
+} */
+label{
+    width: 20%;
+}
+input{
+    width: 70%;
+}
+article{
+    width: 800px;
+    height: 450px;
+    border: 2px solid #2c4284;
+    padding: 20px;    
+    margin: 20px 35px;    
+}
+#reg{
+    margin-top: 15px;
+    width: 100px;
+}
+p{
+    color: red;
+
+}

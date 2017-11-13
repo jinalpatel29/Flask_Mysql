@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wall Assignment - advanced version</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='wall.css')}}">
+</head>
+<body>
+   <div class="container">
+       <header>
+           <h1> CodingDojo Wall</h1>
+           <p id="head">Welcome {{session['firstname']}}!</p>
+           <a href="/logoff">log off</a>
+       </header>
+       <div class="posts">
+           <form action="/post" method="post">
+                <h2 id="post">Post a message</h2>
+                <input type="textarea" name="message" placeholder="Post message here">
+                <button type="submit">Post a message</button>
+            </form>
+        </div>
+
+        <div class="messages">            
+            {% if messages %} 
+                {% for message in messages %}
+                <div class="box">
+                    <h3>{{message['firstname']}}   {{message['lastname']}}  -  {{message['created_at']}}</h3>
+                    <p id="msg">{{message['message']}}</p>
+                                {% if message['time_elapsed'] <= 30 %}
+                                    {% if message['user_id'] == session['id']%}
+                                        <form action="/delete" method="post">
+                                            <input type="hidden" name="msg" value="{{message['id']}}">  
+                                            <button type="submit" id="delete">Delete</button>
+                                        </form>
+                                    {% endif %}
+                                {% endif %}
+                                    <!-- {% if comments %}  -->
+                                        {%for comment in comments %}
+                                            {% if comment['cmsgId'] == message['id'] %}
+                                            <div class="content">
+                                            <h5>{{comment['firstname']}}   {{comment['lastname']}}  -  {{comment['created_at']}}</h5>
+                                            <p id="cmt">{{comment['comment']}}</p>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %} 
+                                    
+                                    <!-- {% endif %}                                         -->
+                    <form action="/comment" method="post">  
+                        <input type="hidden" name="msgid" value="{{message['id']}}">                    
+                        <input id="comment" type="textarea" name="comment" placeholder="Comment here">
+                        <button id="green" type="submit">Comment</button>
+                    </form>
+                </div>
+                    {% endfor %} 
+            {% endif %} 
+        </div>
+   </div>
+    
+</body>
+</html>

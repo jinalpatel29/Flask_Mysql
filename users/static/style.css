@@ -1,0 +1,53 @@
+h1{
+    text-align: center;
+}
+form{
+    margin: 0 30%;
+}
+
+table{
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+table td{
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    padding: 5px;
+    text-align: left;
+}
+
+table th {
+    text-align: center;
+    background-color: #1e3535;
+    color: rgb(229, 238, 236);
+    padding: 4px 30px 4px 8px; 
+}
+
+table tr{
+    text-align: left;
+}
+
+table td:first-child{
+    text-align: right;
+}
+
+table tr:nth-child(odd) td {
+    background-color:#bedfcc;
+}
+
+#delete{
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+    color: blue;
+    margin: 0;
+}
+form{
+    margin: 0;
+}
+a,form{
+    display: inline-block;
+}
+h1{
+    text-align: left;
+}

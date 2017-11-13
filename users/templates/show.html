@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show user</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h1>User {{id}}</h1>
+        <p>FullName : {{fname}}  {{lname}} </p>
+        <p>Email : {{email}}</p>
+        <p>Created at : {{created}}</p>
+        <a href="/users/{{id}}/edit">Edit</a>
+        <form action="/{{id}}/delete" method="post">
+            <button type="submit" id="delete">Delete</button>
+        </form>
+    </div>
+</body>
+</html>
