@@ -5,6 +5,7 @@
 }
 body{
     background-image: url('wall.jpg');
+    background-attachment: fixed;
 }
 .container{
     /* width: 970px;   */

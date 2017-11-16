@@ -88,17 +88,6 @@ def register():
         # flash("You have successfully registered !")
         return redirect('/wall')
 
-@app.route('/loggedIn')
-def loggedin():
-    if 'id' in session:
-        query = "SELECT * from users WHERE users.id=:id"
-        data = {'id': session['id']}
-        user = mysql.query_db(query, data)      
-        fname = user[0]['firstname']
-        lname = user[0]['lastname']
-        emailId= user[0]['email']    
-    return render_template('confirm.html', fname=fname, lname=lname, email=emailId)
-
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
@@ -143,13 +132,15 @@ def comment():
 
 @app.route('/wall')
 def wall():
-    query = "SELECT users.id as user_id, users.firstname, users.lastname, messages.message, messages.id, DATE_FORMAT(messages.created_at, '%M %D %Y') AS created_at,TIME_TO_SEC(timediff( NOW(),           messages.created_at))/60 AS time_elapsed from users JOIN messages ON messages.user_id = users.id"
-    messages = mysql.query_db(query)
-    session['firstname']
-    comment_query = "SELECT users.firstname, users.lastname, comments.comment, messages.id as msgId, comments.message_id AS cmsgId, DATE_FORMAT(comments.created_at, '%M %D %Y') AS created_at                     FROM users JOIN comments ON users.id = comments.user_id JOIN messages ON messages.id = comments.message_id"
-    comments = mysql.query_db(comment_query)
-   
-    return render_template('wall.html', messages=messages, comments=comments)
+    if 'id' in session:
+        query = "SELECT users.id as user_id, users.firstname, users.lastname, messages.message, messages.id, DATE_FORMAT(messages.created_at, '%M %D %Y') AS created_at,TIME_TO_SEC(timediff( NOW(),           messages.created_at))/60 AS time_elapsed from users JOIN messages ON messages.user_id = users.id"
+        messages = mysql.query_db(query)
+        session['firstname']
+        comment_query = "SELECT users.firstname, users.lastname, comments.comment, messages.id as msgId, comments.message_id AS cmsgId, DATE_FORMAT(comments.created_at, '%M %D %Y') AS created_at                     FROM users JOIN comments ON users.id = comments.user_id JOIN messages ON messages.id = comments.message_id"
+        comments = mysql.query_db(comment_query)   
+        return render_template('wall.html', messages=messages, comments=comments)
+    else:
+        return redirect('/')
 
 @app.route('/delete', methods=['POST'])
 def delete():       
@@ -166,5 +157,20 @@ def delete():
 
 @app.route('/logoff')
 def reset():
+    session.clear()
     return redirect('/')
+
+# @app.route('/loggedIn')
+# def loggedin():
+#     if 'id' in session:
+#         query = "SELECT * from users WHERE users.id=:id"
+#         data = {'id': session['id']}
+#         user = mysql.query_db(query, data)      
+#         fname = user[0]['firstname']
+#         lname = user[0]['lastname']
+#         emailId= user[0]['email']    
+#         return render_template('confirm.html', fname=fname, lname=lname, email=emailId)
+#     else:
+#         return redirect('/')
+
 app.run(debug='True')

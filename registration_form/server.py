@@ -25,8 +25,7 @@ def signup():
     return render_template('register.html')
 
 @app.route('/register', methods=['POST'])
-def register():
-    print request.form    
+def register(): 
     error = False
     email_id = request.form['email']
     fname = request.form['fname']
@@ -38,66 +37,79 @@ def register():
         bday = datetime.strptime(bday,"%Y-%m-%d")
     CurrentDate = datetime.now()
  
-    if email_id == "" or fname =="" or lname=="" or passwrd =="" or confirm_pwd =="" or bday =="":
-        error = True
-        flash("All fields are required and must not be blank")
-    else:
-        if fname != "":
-            if not NAME_REGEX.match(fname):
+    query = " SELECT * FROM users WHERE users.email=:email"
+    data = {
+        'email':email_id
+    }
+    user = mysql.query_db(query, data)
+    print user
+    if user == None:
+        if email_id == "" or fname =="" or lname=="" or passwrd =="" or confirm_pwd =="" or bday =="":
+            error = True
+            flash("All fields are required and must not be blank")
+        else:
+            if fname != "":
+                if not NAME_REGEX.match(fname):
+                    error = True
+                    flash("Invalid first name ("+fname+") cannot have number ")
+            if lname != "":
+                if not NAME_REGEX.match(lname):
+                    error = True
+                    flash("Invalid last name ("+lname+") cannot have number ")
+            if email_id != "":
+                if not EMAIL_REGEX.match(email_id):
+                    error = True
+                    flash("Invalid Email Address! please follow abc@xyz.com")  
+                
+            if len(passwrd) < 8:
                 error = True
-                flash("Invalid first name ("+fname+") cannot have number ")
-        if lname != "":
-            if not NAME_REGEX.match(lname):
+                flash("Password should be more than 8 characters")
+            elif not PWD_REGEX.match(passwrd):
                 error = True
-                flash("Invalid last name ("+lname+") cannot have number ")
-        if email_id != "":
-            if not EMAIL_REGEX.match(email_id):
+                flash("Invalid password! Password must contain atleast 1 Uppercase and 1 numeric value")    
+            elif passwrd != confirm_pwd:
                 error = True
-                flash("Invalid Email Address! please follow abc@xyz.com")    
-        if len(passwrd) < 8:
-            error = True
-            flash("Password should be more than 8 characters")
-        elif not PWD_REGEX.match(passwrd):
-            error = True
-            flash("Invalid password! Password must contain atleast 1 Uppercase and 1 numeric value")    
-        elif passwrd != confirm_pwd:
-            error = True
-            flash("Password and Password Confirmation are not matching")
-        if bday > CurrentDate:
-            error = True
-            flash("Please enter valid date")
+                flash("Password and Password Confirmation are not matching")
+            if bday > CurrentDate:
+                error = True
+                flash("Please enter valid date")
     
-    if error:
-        return redirect('/signup')
+        if error:
+            return redirect('/signup')
+        else:
+            password = passwrd
+            salt =  binascii.b2a_hex(os.urandom(15))
+            hashed_pw = md5.new(password + salt).hexdigest()
+            query = "INSERT INTO users(firstname, lastname, email, birthdate, password, created_at, updated_at, salt) VALUES(:firstname, :lastname, :email, :birthdate, :password, NOW(), NOW(),:salt)"
+            data = {
+                'firstname': fname,
+                'lastname': lname,
+                'email': email_id,
+                'birthdate': bday,
+                'password':hashed_pw,
+                'salt': salt
+            }
+            session['id'] = mysql.query_db(query,data)  
+            flash("You have successfully registered !")
+            return redirect('/loggedIn')
     else:
-        password = passwrd
-        salt =  binascii.b2a_hex(os.urandom(15))
-        hashed_pw = md5.new(password + salt).hexdigest()
-        query = "INSERT INTO users(firstname, lastname, email, birthdate, password, created_at, updated_at, salt) VALUES(:firstname, :lastname, :email, :birthdate, :password, NOW(), NOW(),:salt)"
-        data = {
-            'firstname': fname,
-            'lastname': lname,
-            'email': email_id,
-            'birthdate': bday,
-            'password':hashed_pw,
-            'salt': salt
-        }
-        session['id'] = mysql.query_db(query,data)  
-        flash("You have successfully registered !")
-        return redirect('/loggedIn')
+        flash("Please use another email id, this id is already in use")
+        return redirect('/signup')
 
 @app.route('/loggedIn')
 def loggedin():
+    # print session['id']
     if 'id' in session:
         query = "SELECT * from users WHERE users.id=:id"
         data = {'id': session['id']}
         user = mysql.query_db(query, data)
         print "user after register"
-        print user[0]
         fname = user[0]['firstname']
         lname = user[0]['lastname']
         emailId= user[0]['email']    
-    return render_template('confirm.html', fname=fname, lname=lname, email=emailId)
+        return render_template('confirm.html', fname=fname, lname=lname, email=emailId)
+    else:
+        return redirect('/')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -119,5 +131,6 @@ def login():
 
 @app.route('/reset')
 def reset():
+    session.clear()
     return redirect('/')
 app.run(debug='True')
